@@ -12,6 +12,8 @@
 		2CBB250C235B3B9C00ED8A1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBB250A235B3B9C00ED8A1F /* MainMenu.xib */; };
 		2CBB2518235B3B9C00ED8A1F /* transTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB2517235B3B9C00ED8A1F /* transTests.swift */; };
 		2CBB2523235B3B9C00ED8A1F /* transUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB2522235B3B9C00ED8A1F /* transUITests.swift */; };
+		2CBB2538235BF75400ED8A1F /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CBB2536235BF75400ED8A1F /* PopoverViewController.xib */; };
+		2CBB2539235BF75400ED8A1F /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBB2537235BF75400ED8A1F /* PopoverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		2CBB251E235B3B9C00ED8A1F /* transUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = transUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBB2522235B3B9C00ED8A1F /* transUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transUITests.swift; sourceTree = "<group>"; };
 		2CBB2524235B3B9C00ED8A1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CBB2536235BF75400ED8A1F /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverViewController.xib; sourceTree = "<group>"; };
+		2CBB2537235BF75400ED8A1F /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 		2CBB2505235B3B9B00ED8A1F /* trans */ = {
 			isa = PBXGroup;
 			children = (
+				2CBB2537235BF75400ED8A1F /* PopoverViewController.swift */,
+				2CBB2536235BF75400ED8A1F /* PopoverViewController.xib */,
 				2CBB2506235B3B9B00ED8A1F /* AppDelegate.swift */,
 				2CBB2508235B3B9C00ED8A1F /* Assets.xcassets */,
 				2CBB250A235B3B9C00ED8A1F /* MainMenu.xib */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CBB2538235BF75400ED8A1F /* PopoverViewController.xib in Resources */,
 				2CBB2509235B3B9C00ED8A1F /* Assets.xcassets in Resources */,
 				2CBB250C235B3B9C00ED8A1F /* MainMenu.xib in Resources */,
 			);
@@ -251,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CBB2539235BF75400ED8A1F /* PopoverViewController.swift in Sources */,
 				2CBB2507235B3B9B00ED8A1F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,11 +426,13 @@
 				CODE_SIGN_ENTITLEMENTS = trans/trans.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.2;
 				INFOPLIST_FILE = trans/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Seon.trans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -436,11 +446,13 @@
 				CODE_SIGN_ENTITLEMENTS = trans/trans.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1.2;
 				INFOPLIST_FILE = trans/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = Seon.trans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
