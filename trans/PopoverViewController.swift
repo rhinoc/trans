@@ -31,7 +31,7 @@ class PopoverViewController: NSViewController {
         guard let items = pb.pasteboardItems else { return }
         
         guard let cur = items.first?.string(forType: .string) else { return }
-        if (temp != cur){
+        if (cur != temp && cur != tempTrans){
             inputText.stringValue = cur
             getTranslationResult(str: cur, type:"copy")
             temp = cur
