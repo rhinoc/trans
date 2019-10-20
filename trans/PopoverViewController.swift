@@ -65,9 +65,9 @@ class PopoverViewController: NSViewController {
     func getTranslationResult(str:String, type:String) -> Void {
         if (str.isEmpty) {return}
         
-        let appid = "20190324000280614";
-        let salt = "1435660288";
-        let key = "rYR8A0Lek15iB6v1yn0k";
+        let appid = "xxxxx"; //换成你自己的百度翻译APPID
+        let salt = "1435660288"; //其实应该是随机数的但是我太懒了
+        let key = "xxxxx"; //换成你自己的百度翻译KEY
         let sign = md5Hash(str: appid+str+salt+key);
         let base = "https://fanyi-api.baidu.com/api/trans/vip/translate"
         let url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from=auto&to=zh";
