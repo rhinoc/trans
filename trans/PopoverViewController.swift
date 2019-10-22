@@ -11,21 +11,22 @@ import CommonCrypto
 import UserNotifications
 import Foundation
 
+var state = 1
 var temp = ""
 var tempTrans = ""
 var from = "auto"
-var to = "zh"
+var to = "auto"
 
 
 class PopoverViewController: NSViewController {
+    @IBOutlet var settingsMenu: NSMenu!
     
     @IBOutlet weak var inputText: NSSearchField!
     @IBOutlet weak var translatedText: NSTextField!
     @IBOutlet weak var copyButton: NSButton!
     @IBOutlet weak var langSwicher: NSPopUpButtonCell!
-    @IBOutlet weak var touchBarView: NSPopoverTouchBarItem!
-    @IBOutlet weak var touchBarText: NSTextField!
     
+    @IBOutlet weak var enableTransItem: NSMenuItem!
     @IBAction func switchLanguage(_ sender: Any) {
         let selected = langSwicher.indexOfSelectedItem
         temp = ""
@@ -33,21 +34,46 @@ class PopoverViewController: NSViewController {
         switch selected {
         case 0:
             from = "auto"
+            to = "auto"
+        case 1:
+            from = "auto"
             to = "zh"
             break
-        case 1:
+        case 2:
             from = "auto"
             to = "en"
             break
         default:
             from = "auto"
-            to = "zh"
+            to = "auto"
         }
     }
     
+    @IBAction func settingsButton(_ sender: Any) {
+        let p = NSPoint(x: (sender as AnyObject).frame.width, y: 0)
+        settingsMenu.popUp(positioning: nil, at: p, in: sender as! NSView)
+    }
+    
+    @IBAction func quitApp(_ sender: Any) {
+        NSApplication.shared.terminate(self)
+    }
+    
+    
+    @IBAction func enableTrans(_ sender: Any) {
+        state = enableTransItem.state.rawValue
+        if (state == 1) {
+            enableTransItem.state = NSControl.StateValue.off
+        }
+        else {
+            enableTransItem.state = NSControl.StateValue.on
+        }
+        state = enableTransItem.state.rawValue
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(onPasteboardChanged), name: .NSPasteboardDidChange, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(onPasteboardChanged), name: .NSPasteboardDidChange, object: nil)
     }
     
     @objc
@@ -56,21 +82,17 @@ class PopoverViewController: NSViewController {
         guard let items = pb.pasteboardItems else { return }
         
         guard let cur = items.first?.string(forType: .string) else { return }
-        if (cur != temp && cur != tempTrans){
+        if (cur != temp && cur != tempTrans && state==1){
             inputText.stringValue = cur
             getTranslationResult(str: cur, type:"copy")
             temp = cur
         }
     }
     
-    @IBAction func closePopover(_ sender: Any) {
-        NSApplication.shared.terminate(self)
-    }
-    
     @IBAction func searchClick(_ sender: NSSearchField) {
         copyButton.title = "Copy"
         let cur = sender.stringValue;
-        if (cur != temp && cur != tempTrans){
+        if (cur != temp){
             getTranslationResult(str: cur, type:"search")
             temp = cur
         }
@@ -86,22 +108,35 @@ class PopoverViewController: NSViewController {
         pb.clearContents()
         pb.setString(tempTrans, forType: .string)
         copyButton.title = "Copied"
-//        copyButton.image = NSImage(named: NSImage.Name("NSMenuOnStateTemplate"))
     }
     
     func getTranslationResult(str:String, type:String) -> Void {
         if (str.isEmpty) {
             translatedText.stringValue = ""
-            labelTouchBar(str: "")
+//            labelTouchBar(str: "")
             return
         }
         
-        let appid = "xxxx"; //换成你自己的百度翻译APPID
+        let appid = "xxxxx"; //换成你自己的百度翻译APPID
         let salt = "1435660288"; //其实应该是随机数的但是我太懒了
-        let key = "xxxx"; //换成你自己的百度翻译KEY
+        let key = "xxxxx"; //换成你自己的百度翻译KEY
         let sign = md5Hash(str: appid+str+salt+key);
         let base = "https://fanyi-api.baidu.com/api/trans/vip/translate"
-        let url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from="+from+"&to="+to;
+        var url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from="+from+"&to="+to;
+        
+        
+        let srclang = determineLang(str: str)
+        print(srclang,to)
+        if (srclang == to && type=="copy") {
+            return
+        }
+        else if (to == "auto" && srclang == "zh") {
+            url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from=zh&to=en";
+        }
+        else if (to == "auto" && srclang == "en") {
+            url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from=en&to=zh";
+        }
+        
         
         func getTranslationSuccess(data: Data?, response: URLResponse?, error: Error?) -> Void {
             DispatchQueue.main.async {
@@ -123,7 +158,7 @@ class PopoverViewController: NSViewController {
                         
                         tempTrans = r.trans_result[0].dst;
                         self.translatedText.stringValue = tempTrans;
-                        self.labelTouchBar(str: r.trans_result[0].dst)
+//                        self.labelTouchBar(str: r.trans_result[0].dst)
                         
                         if (type == "copy" ) {
                             self.notify(title: r.trans_result[0].src,body: r.trans_result[0].dst)
@@ -164,13 +199,18 @@ class PopoverViewController: NSViewController {
         return ""
     }
     
-    func labelTouchBar(str: String){
-        touchBarText.stringValue = str;
-        
-//        touchBarView.collapsedRepresentationLabel = str;
-//        touchBarView.customizationLabel = str;
-//        touchBarView.showsCloseButton = true;
-//        touchBarView.showPopover(<#T##sender: Any?##Any?#>)
+//    func labelTouchBar(str: String){
+//        touchbarLabel.stringValue = str;
+//        touchbarPopover.collapsedRepresentationLabel = str;
+//    }
+    
+    func determineLang(str: String) -> String {
+        for (_, value) in str.enumerated() {
+            if ("\u{4E00}" <= value  && value <= "\u{9FA5}") {
+                return "zh"
+            }
+        }
+        return "en"
     }
     
     func notify(title: String,body: String){
@@ -213,7 +253,7 @@ class PopoverViewController: NSViewController {
                }
            }
            else {
-               print(error)
+               print("error")
            }
         }
     }
