@@ -13,8 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var timer: Timer!
     let pasteboard: NSPasteboard = .general
     var lastChangeCount: Int = 0
-    
+
     @IBOutlet weak var popover: NSPopover!
+    
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -31,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 NotificationCenter.default.post(name: .NSPasteboardDidChange, object: self.pasteboard)
             }
         }
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -58,7 +60,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             showPopover(sender)
         }
     }
-
 }
 
 extension NSNotification.Name {

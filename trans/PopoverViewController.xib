@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="14550"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PopoverViewController" customModule="trans" customModuleProvider="target">
             <connections>
+                <outlet property="copyButton" destination="fsH-k4-i4P" id="ybr-l5-Unp"/>
                 <outlet property="inputText" destination="sIW-r5-vie" id="iSD-5J-3ae"/>
-                <outlet property="translatedText" destination="6Er-T0-aod" id="sj4-sO-Afl"/>
+                <outlet property="langSwicher" destination="w6m-px-Sfo" id="FBs-yA-tfd"/>
+                <outlet property="touchBarPopOver" destination="Ekw-I1-Ngh" id="ZkX-T3-K6C"/>
+                <outlet property="touchBarText" destination="YeO-lb-Gb3" id="efj-Ek-Vyq"/>
+                <outlet property="touchBarView" destination="Ekw-I1-Ngh" id="FBe-Sv-dXd"/>
+                <outlet property="translatedText" destination="1GX-hH-st7" id="keY-1a-jUJ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="317" height="219"/>
+            <rect key="frame" x="0.0" y="0.0" width="317" height="182"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGH-Eq-SOQ">
-                    <rect key="frame" x="227" y="16" width="21" height="21"/>
+                    <rect key="frame" x="223" y="15" width="21" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSStopProgressFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="kxp-uO-nKH">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -29,8 +36,65 @@
                         <action selector="closePopover:" target="-2" id="y5I-Sb-H9e"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsH-k4-i4P">
+                    <rect key="frame" x="122" y="8" width="72" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FR8-Yi-Zu3">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="copyResult:" target="-2" id="BvE-Wh-tPC"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxT-DC-XoY">
+                    <rect key="frame" x="75" y="15" width="21" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="cjR-p5-c1U">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="clearResult:" target="-2" id="itY-Cz-Pm0"/>
+                    </connections>
+                </button>
+                <textField canDrawConcurrently="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1GX-hH-st7">
+                    <rect key="frame" x="18" y="44" width="281" height="81"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Translation" allowsEditingTextAttributes="YES" id="Uo6-pY-Yq6" customClass="VerticallyCenteredTextFieldCell" customModule="trans" customModuleProvider="target">
+                        <font key="font" metaFont="system" size="16"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uXv-GM-GWC">
+                    <rect key="frame" x="266" y="15" width="38" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="NWl-ig-c19">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
+                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oPK-24-zSb">
+                    <rect key="frame" x="18" y="135" width="62" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title="→中" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="da0-iB-d68" id="w6m-px-Sfo">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                        <menu key="menu" id="1pq-ob-IWA">
+                            <items>
+                                <menuItem title="→中" state="on" id="da0-iB-d68"/>
+                                <menuItem title="→英" id="6i3-9B-D5j"/>
+                                <menuItem title="Auto" id="6Kv-zg-C6H"/>
+                            </items>
+                        </menu>
+                        <connections>
+                            <action selector="switchLanguage:" target="-2" id="SLt-Nc-hdO"/>
+                        </connections>
+                    </popUpButtonCell>
+                </popUpButton>
                 <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIW-r5-vie">
-                    <rect key="frame" x="38" y="165" width="241" height="22"/>
+                    <rect key="frame" x="85" y="138" width="212" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <searchFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="RCl-NJ-ZPe">
                         <font key="font" metaFont="system"/>
@@ -41,43 +105,41 @@
                         <action selector="searchClick:" target="-2" id="zaR-KE-0Sq"/>
                     </connections>
                 </searchField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Er-T0-aod">
-                    <rect key="frame" x="20" y="50" width="276" height="100"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <textFieldCell key="cell" selectable="YES" alignment="center" allowsEditingTextAttributes="YES" id="KuR-yt-HoH">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fsH-k4-i4P">
-                    <rect key="frame" x="123" y="9" width="72" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FR8-Yi-Zu3">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="copyResult:" target="-2" id="BvE-Wh-tPC"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxT-DC-XoY">
-                    <rect key="frame" x="72" y="16" width="21" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="cjR-p5-c1U">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="clearResult:" target="-2" id="itY-Cz-Pm0"/>
-                    </connections>
-                </button>
             </subviews>
-            <point key="canvasLocation" x="57.5" y="180.5"/>
+            <point key="canvasLocation" x="57.5" y="162"/>
         </customView>
+        <touchBar id="nnX-92-g6I">
+            <touchBarItems>
+                <touchBarPopoverItem collapsedRepresentationImage="statusIcon" collapsedRepresentationLabel="" id="Ekw-I1-Ngh">
+                    <touchBar key="popoverTouchBar" id="Bi7-bY-eiX">
+                        <touchBarItems>
+                            <touchBarSpacerItem identifier="NSTouchBarItemIdentifierFixedSpaceSmall" id="taa-vJ-B9p"/>
+                            <touchBarItem id="5Pp-lR-Khb">
+                                <viewController key="viewController" id="mza-ea-WJC">
+                                    <textField key="view" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YeO-lb-Gb3">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="18"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="Tbp-EV-Veu">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </viewController>
+                            </touchBarItem>
+                        </touchBarItems>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="Pka-UD-5LU"/>
+                        </connections>
+                    </touchBar>
+                </touchBarPopoverItem>
+            </touchBarItems>
+            <point key="canvasLocation" x="261" y="348"/>
+        </touchBar>
     </objects>
     <resources>
+        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
+        <image name="statusIcon" width="18" height="18"/>
     </resources>
 </document>

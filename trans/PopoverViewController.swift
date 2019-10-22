@@ -9,20 +9,45 @@
 import Cocoa
 import CommonCrypto
 import UserNotifications
+import Foundation
 
 var temp = ""
 var tempTrans = ""
+var from = "auto"
+var to = "zh"
+
 
 class PopoverViewController: NSViewController {
     
     @IBOutlet weak var inputText: NSSearchField!
     @IBOutlet weak var translatedText: NSTextField!
+    @IBOutlet weak var copyButton: NSButton!
+    @IBOutlet weak var langSwicher: NSPopUpButtonCell!
+    @IBOutlet weak var touchBarView: NSPopoverTouchBarItem!
+    @IBOutlet weak var touchBarText: NSTextField!
+    
+    @IBAction func switchLanguage(_ sender: Any) {
+        let selected = langSwicher.indexOfSelectedItem
+        temp = ""
+        tempTrans = ""
+        switch selected {
+        case 0:
+            from = "auto"
+            to = "zh"
+            break
+        case 1:
+            from = "auto"
+            to = "en"
+            break
+        default:
+            from = "auto"
+            to = "zh"
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(onPasteboardChanged), name: .NSPasteboardDidChange, object: nil)
-        
     }
     
     @objc
@@ -43,6 +68,7 @@ class PopoverViewController: NSViewController {
     }
     
     @IBAction func searchClick(_ sender: NSSearchField) {
+        copyButton.title = "Copy"
         let cur = sender.stringValue;
         if (cur != temp && cur != tempTrans){
             getTranslationResult(str: cur, type:"search")
@@ -59,18 +85,23 @@ class PopoverViewController: NSViewController {
         let pb = NSPasteboard.general
         pb.clearContents()
         pb.setString(tempTrans, forType: .string)
+        copyButton.title = "Copied"
+//        copyButton.image = NSImage(named: NSImage.Name("NSMenuOnStateTemplate"))
     }
     
-    
     func getTranslationResult(str:String, type:String) -> Void {
-        if (str.isEmpty) {return}
+        if (str.isEmpty) {
+            translatedText.stringValue = ""
+            labelTouchBar(str: "")
+            return
+        }
         
-        let appid = "xxxxx"; //换成你自己的百度翻译APPID
+        let appid = "xxxx"; //换成你自己的百度翻译APPID
         let salt = "1435660288"; //其实应该是随机数的但是我太懒了
-        let key = "xxxxx"; //换成你自己的百度翻译KEY
+        let key = "xxxx"; //换成你自己的百度翻译KEY
         let sign = md5Hash(str: appid+str+salt+key);
         let base = "https://fanyi-api.baidu.com/api/trans/vip/translate"
-        let url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from=auto&to=zh";
+        let url = base+"?q="+str.urlEncoded()+"&appid="+appid+"&salt="+salt+"&sign="+sign+"&from="+from+"&to="+to;
         
         func getTranslationSuccess(data: Data?, response: URLResponse?, error: Error?) -> Void {
             DispatchQueue.main.async {
@@ -92,6 +123,7 @@ class PopoverViewController: NSViewController {
                         
                         tempTrans = r.trans_result[0].dst;
                         self.translatedText.stringValue = tempTrans;
+                        self.labelTouchBar(str: r.trans_result[0].dst)
                         
                         if (type == "copy" ) {
                             self.notify(title: r.trans_result[0].src,body: r.trans_result[0].dst)
@@ -130,6 +162,15 @@ class PopoverViewController: NSViewController {
             return md5String
         }
         return ""
+    }
+    
+    func labelTouchBar(str: String){
+        touchBarText.stringValue = str;
+        
+//        touchBarView.collapsedRepresentationLabel = str;
+//        touchBarView.customizationLabel = str;
+//        touchBarView.showsCloseButton = true;
+//        touchBarView.showPopover(<#T##sender: Any?##Any?#>)
     }
     
     func notify(title: String,body: String){
@@ -213,5 +254,21 @@ extension PopoverViewController: UNUserNotificationCenterDelegate {
     // 配置通知发起时的行为 alert -> 显示弹窗, sound -> 播放提示音
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
+    }
+}
+
+
+
+class VerticallyCenteredTextFieldCell: NSTextFieldCell {
+    
+    override func drawingRect(forBounds theRect: NSRect) -> NSRect {
+        var newRect:NSRect = super.drawingRect(forBounds: theRect)
+        let textSize:NSSize = self.cellSize(forBounds: theRect)
+        let heightDelta:CGFloat = newRect.size.height - textSize.height
+        if heightDelta > 0 {
+            newRect.size.height = textSize.height
+            newRect.origin.y += heightDelta / 2
+        }
+        return newRect
     }
 }
