@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:trans.xcodeproj">
+      location = "self:/Users/seon/Documents/Xcode/tranns/trans.xcodeproj">
    </FileRef>
 </Workspace>

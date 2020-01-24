@@ -1,6 +1,15 @@
 # trans
 a small and fast translator living in macOS menu bar
 
+2020/01/24 Updated 大噶除夕快乐
+
+-------
+
+1. UI由XIB改为storyboard
+2. 增加设置功能，用户可选择使用百度翻译或有道翻译，以及使用自己的APPID和KEY
+3. 最低支持版本为 macOS 10.14 Mojave
+4. 程序体积在1M以内，由于需要支持Mojave编译后膨胀到10+M，对体积有要求的朋友可以下载Catalina版本或自行修改deployment target编译
+
 
 前几天在macOS的App Store上看到一个叫「小翻译」的应用：
 
@@ -37,7 +46,7 @@ a small and fast translator living in macOS menu bar
 * [x] 输入搜索翻译
 * [ ] 设置-开机自启
 * [x] 设置-原文语言和目标语言
-* [ ] 设置-API选择和Token设置
+* [x] 设置-API选择和Token设置
 * [ ] 第一次开启应用时不弹Popover
 * [x] 输入翻译时的TextFiled显示优化
 * [ ] 快捷键翻译
