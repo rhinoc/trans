@@ -1,17 +1,29 @@
 //
 //  AppDelegate.swift
-//  tranns
+//  trans
 //
 //  Created by Seon Wong on 2020/1/24.
 //  Copyright © 2020 rhinoc. All rights reserved.
 //
 
 import Cocoa
+import AppKit
+import Async
+import Carbon
+import Foundation
+import Alamofire
+import HotKey
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     // 菜单
     @IBOutlet weak var menu: NSMenu!
+    @IBAction func onCapture(_ sender: NSMenuItem) {
+        guard let picPath = Utils.capturePic() else {
+            return
+        }
+        recognizepic(picPath: picPath)
+    }
     
     @IBOutlet weak var pasteTransToggle: NSMenuItem!
     var prefs = Preferences()
@@ -50,8 +62,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         timer.fire()
     }
-
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // 全局快捷键
+        hotKey = HotKey(key: .a, modifiers: [.control])
+        
         // 指定右键菜单的代理
         menu.delegate = self
         
@@ -63,9 +78,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         if let button = statusItem.button { //设置按钮的样式和点击事件
-          button.image = NSImage(named:NSImage.Name("statusIcon"))
-          button.action = #selector(mouseClickHandler)
-          button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+            button.image = NSImage(named:NSImage.Name("statusIcon"))
+            button.action = #selector(mouseClickHandler)
+            button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         }
         popover.contentViewController = PopoverViewController.freshController() //将弹窗与storyboard绑定
         
@@ -94,11 +109,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func togglePopover(_ sender: Any?) {
-      if popover.isShown {
-        closePopover(sender: sender)
-      } else {
-        showPopover(sender: sender)
-      }
+        if popover.isShown {
+            closePopover(sender: sender)
+        } else {
+            showPopover(sender: sender)
+        }
     }
     
     func showPopover(sender: Any?){
@@ -112,113 +127,119 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         popover.performClose(sender)
         eventMonitor?.stop()
     }
-
+    
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
         timer.invalidate()
     }
-// 需要10.15
-//    // MARK: - Core Data stack
-//
-//    lazy var persistentContainer: NSPersistentCloudKitContainer = {
-//        /*
-//         The persistent container for the application. This implementation
-//         creates and returns a container, having loaded the store for the
-//         application to it. This property is optional since there are legitimate
-//         error conditions that could cause the creation of the store to fail.
-//        */
-//        let container = NSPersistentCloudKitContainer(name: "tranns")
-//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error {
-//                // Replace this implementation with code to handle the error appropriately.
-//                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//
-//                /*
-//                 Typical reasons for an error here include:
-//                 * The parent directory does not exist, cannot be created, or disallows writing.
-//                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-//                 * The device is out of space.
-//                 * The store could not be migrated to the current model version.
-//                 Check the error message to determine what the actual problem was.
-//                 */
-//                fatalError("Unresolved error \(error)")
-//            }
-//        })
-//        return container
-//    }()
-
-//    // MARK: - Core Data Saving and Undo support
-//
-//    @IBAction func saveAction(_ sender: AnyObject?) {
-//        // Performs the save action for the application, which is to send the save: message to the application's managed object context. Any encountered errors are presented to the user.
-//        let context = persistentContainer.viewContext
-//
-//        if !context.commitEditing() {
-//            NSLog("\(NSStringFromClass(type(of: self))) unable to commit editing before saving")
-//        }
-//        if context.hasChanges {
-//            do {
-//                try context.save()
-//            } catch {
-//                // Customize this code block to include application-specific recovery steps.
-//                let nserror = error as NSError
-//                NSApplication.shared.presentError(nserror)
-//            }
-//        }
-//    }
-
-//    func windowWillReturnUndoManager(window: NSWindow) -> UndoManager? {
-//        // Returns the NSUndoManager for the application. In this case, the manager returned is that of the managed object context for the application.
-//        return persistentContainer.viewContext.undoManager
-//    }
-
-//    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
-//        // Save changes in the application's managed object context before the application terminates.
-//        let context = persistentContainer.viewContext
-//        
-//        if !context.commitEditing() {
-//            NSLog("\(NSStringFromClass(type(of: self))) unable to commit editing to terminate")
-//            return .terminateCancel
-//        }
-//        
-//        if !context.hasChanges {
-//            return .terminateNow
-//        }
-//        
-//        do {
-//            try context.save()
-//        } catch {
-//            let nserror = error as NSError
-//
-//            // Customize this code block to include application-specific recovery steps.
-//            let result = sender.presentError(nserror)
-//            if (result) {
-//                return .terminateCancel
-//            }
-//            
-//            let question = NSLocalizedString("Could not save changes while quitting. Quit anyway?", comment: "Quit without saves error question message")
-//            let info = NSLocalizedString("Quitting now will lose any changes you have made since the last successful save", comment: "Quit without saves error question info");
-//            let quitButton = NSLocalizedString("Quit anyway", comment: "Quit anyway button title")
-//            let cancelButton = NSLocalizedString("Cancel", comment: "Cancel button title")
-//            let alert = NSAlert()
-//            alert.messageText = question
-//            alert.informativeText = info
-//            alert.addButton(withTitle: quitButton)
-//            alert.addButton(withTitle: cancelButton)
-//            
-//            let answer = alert.runModal()
-//            if answer == .alertSecondButtonReturn {
-//                return .terminateCancel
-//            }
-//        }
-//        // If we got here, it is time to quit.
-//        return .terminateNow
-//    }
-
+    
+    public var hotKey: HotKey?{
+        didSet {
+            guard let hotKey = hotKey else{
+                return
+            }
+            
+            hotKey.keyDownHandler = { [weak self] in
+                guard let picPath = Utils.capturePic() else {
+                    return
+                }
+                self!.recognizepic(picPath: picPath)
+            }
+        }
+    }
+    
+    private func recognizepic(picPath: String) {
+        let picData = try? Data(contentsOf: URL(fileURLWithPath: picPath))
+        if let base64 = picData?.base64EncodedString() {
+            var prefs = Preferences()
+            let auth_url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id="+prefs.key_bce+"&client_secret="+prefs.token_bce
+            
+            func getAuthToken(data: Data?, response: URLResponse?, error: Error?) -> Void {
+                DispatchQueue.main.async {
+                    do {
+                        let decoder = JSONDecoder()
+                        struct Res: Codable {
+                            let refreshToken: String
+                            let expiresIn: Int
+                            let sessionKey, accessToken, scope, sessionSecret: String
+                            
+                            enum CodingKeys: String, CodingKey {
+                                case refreshToken = "refresh_token"
+                                case expiresIn = "expires_in"
+                                case sessionKey = "session_key"
+                                case accessToken = "access_token"
+                                case scope
+                                case sessionSecret = "session_secret"
+                            }
+                        }
+                        
+                        if (data != nil){
+                            let r = try decoder.decode(Res.self, from: data!)
+                            let access_token = r.accessToken
+                            let request_url = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token="+access_token
+                            
+                            let request = try! URLRequest(url: URL(string: request_url)!, method: HTTPMethod.post)
+                            let encodedRequest = try? URLEncoding.default.encode(request, with: ["image":base64])
+                            let body = encodedRequest?.httpBody!
+                            let rq = AF.upload(body!, to: request.url!)
+                            rq.responseData(completionHandler: { response in
+                                switch response.result{
+                                case .success(let JSON):
+                                    struct BaiduOCRRes: Codable {
+                                        let logID: Double
+                                        let wordsResultNum: Int
+                                        let wordsResult: [WordsResult]
+                                        
+                                        enum CodingKeys: String, CodingKey {
+                                            case logID = "log_id"
+                                            case wordsResultNum = "words_result_num"
+                                            case wordsResult = "words_result"
+                                        }
+                                    }
+                                    struct WordsResult: Codable {
+                                        let words: String
+                                    }
+                                    
+                                    let decoder = JSONDecoder()
+                                    if let r = try? decoder.decode(BaiduOCRRes.self, from: JSON){
+                                        print(r.wordsResult[0].words)
+                                        NotificationCenter.default.post(name: .NSOCR, object: r.wordsResult[0].words)
+                                    }
+                                    else {
+                                        let str = String(decoding: JSON, as: UTF8.self)
+                                        print(str)
+                                    }
+                                    break
+                                    
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            })
+                        }
+                        
+                    } catch{
+                        print("Parse Error")
+                        return
+                    }
+                }
+            }
+            
+            func sendGetRequest(url: String, completionHandler: @escaping ((Data?,URLResponse?,Error?)->Void)) {
+                let session = URLSession(configuration: .default)
+                let task = session.dataTask(with: URL(string: url)!, completionHandler: completionHandler)
+                task.resume()
+            }
+            
+            sendGetRequest(url: auth_url, completionHandler: getAuthToken(data:response:error:))
+            
+            
+        }
+    }
+    
 }
 
 extension NSNotification.Name {
     public static let NSPasteboardDidChange: NSNotification.Name = .init(rawValue: "pasteboardDidChangeNotification")
+    public static let NSOCR: NSNotification.Name = .init(rawValue: "OCRNotification")
 }
 
 extension NSTextField { //令NSTextField可操作常用快捷键

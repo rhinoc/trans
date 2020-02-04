@@ -54,6 +54,33 @@ struct Preferences {
         }
     }
     
+    var key_bce: String { //百度智能云文字识别
+        get {
+          let key = UserDefaults.standard.string(forKey: "key_bce")
+            if key != nil {
+                return key!
+          }
+          return "Rrs6MMgyPSdSyV2mOSBXQnNO"
+        }
+        set {
+          UserDefaults.standard.set(newValue, forKey: "key_bce")
+        }
+    }
+    
+    var token_bce: String {
+        get {
+            let key = UserDefaults.standard.string(forKey: "token_bce")
+            if key != nil {
+                return key!
+            }
+            return "0WGh710Wq6YprjYhgr1ZSrxr6bdNTS4p"
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "token_bce")
+        }
+    }
+    
     var defaultEngine: Int{
         get {
           let engine = UserDefaults.standard.integer(forKey: "defaultEngine")

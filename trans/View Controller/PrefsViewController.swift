@@ -1,6 +1,6 @@
 //
 //  PrefsViewController.swift
-//  tranns
+//  trans
 //
 //  Created by Seon Wong on 2020/1/24.
 //  Copyright © 2020 rhinoc. All rights reserved.

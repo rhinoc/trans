@@ -1,11 +1,11 @@
 //
 //  PopoverViewController.swift
-//  tranns
+//  trans
 //
 //  Created by Seon Wong on 2020/1/24.
 //  Copyright © 2020 rhinoc. All rights reserved.
 //
-
+import AppKit
 import Cocoa
 import CommonCrypto
 import UserNotifications
@@ -17,6 +17,9 @@ var to = "auto"
 var prefs = Preferences()
 
 class PopoverViewController: NSViewController {
+    let appDelegate = NSApplication.shared.delegate as! AppDelegate
+    
+    
     @IBOutlet weak var translateMode: NSPopUpButton! //选择翻译模式
     @IBOutlet weak var inputText: NSSearchField! //输入框
     @IBOutlet weak var resultText: NSTextField! //翻译结果
@@ -66,8 +69,8 @@ class PopoverViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
         NotificationCenter.default.addObserver(self, selector: #selector(onPasteboardChanged), name: .NSPasteboardDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onOCR), name: .NSOCR, object: nil)
     }
     
     //通知相关
@@ -83,6 +86,10 @@ class PopoverViewController: NSViewController {
         }
     }
     
+    @objc func onOCR(_ notification: Notification) {
+        let text = notification.object as? String
+        getTranslationResult(str: text!, type:"ocr")
+    }
     
     //调用翻译API相关
     
@@ -151,14 +158,12 @@ class PopoverViewController: NSViewController {
             url = base+"?q="+str.urlEncoded()+"&from=auto&to="+to_temp+"&appKey="+appid+"&salt="+salt+"&sign="+sign+"&signType=v3"+"&curtime="+curtime;
         }
         
-        print(url)
-        
         func getTranslationSuccess(data: Data?, response: URLResponse?, error: Error?) -> Void {
             DispatchQueue.main.async {
                 do {
                     let decoder = JSONDecoder()
-//                    let str = String(decoding: data!, as: UTF8.self)
-//                    print(str)
+                    //                    let str = String(decoding: data!, as: UTF8.self)
+                    //                    print(str)
                     struct Res_bd: Codable {
                         var from: String
                         var to: String
@@ -180,21 +185,21 @@ class PopoverViewController: NSViewController {
                         let basic: Basic?
                         let l: String?
                         let speakURL: String?
-
+                        
                         enum CodingKeys: String, CodingKey {
                             case tSpeakURL = "tSpeakUrl"
                             case returnPhrase, web, query, translation, errorCode, dict, webdict, basic, l
                             case speakURL = "speakUrl"
                         }
                     }
-
+                    
                     struct Basic: Codable {
                         let examType: [String]?
                         let usPhonetic, phonetic, ukPhonetic: String?
                         let ukSpeech: String?
                         let explains: [String]?
                         let usSpeech: String?
-
+                        
                         enum CodingKeys: String, CodingKey {
                             case examType = "exam_type"
                             case usPhonetic = "us-phonetic"
@@ -209,7 +214,7 @@ class PopoverViewController: NSViewController {
                     struct Dict: Codable {
                         let url: String
                     }
-
+                    
                     struct Web: Codable {
                         let value: [String]
                         let key: String
@@ -229,8 +234,8 @@ class PopoverViewController: NSViewController {
                             temp = r.query;
                         }
                         
-                        if (type == "copy" ) {
-                            self.notify(title: temp,body: tempTrans)
+                        if (type == "copy" || type == "ocr" ) {
+                            self.notify(title: temp,body: tempTrans,type:type)
                         }
                         else {
                             self.resultText.stringValue = tempTrans;
@@ -240,7 +245,7 @@ class PopoverViewController: NSViewController {
                 } catch{
                     self.resultText.stringValue = "Error";
                     if (type == "copy" ) {
-                        self.notify(title: "Error",body: "Something bad just happened")
+                        self.notify(title: "Error",body: "Something bad just happened",type:type)
                     }
                     return
                 }
@@ -286,7 +291,7 @@ class PopoverViewController: NSViewController {
         return ""
     }
     
-    func notify(title: String,body: String){
+    func notify(title: String,body: String,type: String){
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { success, error in
             if error == nil {
@@ -296,11 +301,15 @@ class PopoverViewController: NSViewController {
                     content.title = title;
                     content.body = body;
                     content.userInfo = ["method": "new"]
-                    
                     content.categoryIdentifier = "TRANSLATION_RESULT"
+                    var acceptAction = UNNotificationAction(identifier: "COPY_RESULT_ACTION", title: "Copy", options: .init(rawValue: 0))
+                    var declineAction = UNNotificationAction(identifier: "CLOSE_ACTION", title: "Close", options: .init(rawValue: 0))
+                    if (type == "ocr"){
+                        acceptAction = UNNotificationAction(identifier: "COPY_RESULT_ACTION", title: "译文", options: .init(rawValue: 0))
+                        declineAction = UNNotificationAction(identifier: "COPY_SOURCE_ACTION", title: "原文", options: .init(rawValue: 0))
+                    }
                     
-                    let acceptAction = UNNotificationAction(identifier: "SHOW_ACTION", title: "Copy", options: .init(rawValue: 0))
-                    let declineAction = UNNotificationAction(identifier: "CLOSE_ACTION", title: "Close", options: .init(rawValue: 0))
+                    
                     let testCategory = UNNotificationCategory(identifier: "TRANSLATION_RESULT",
                                                               actions: [acceptAction,declineAction],
                                                               intentIdentifiers: [],
@@ -362,12 +371,19 @@ extension PopoverViewController: UNUserNotificationCenterDelegate {
     // 用户点击弹窗后的回调
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
-        case "SHOW_ACTION":
+        case "COPY_RESULT_ACTION":
             let pb = NSPasteboard.general
             pb.clearContents()
             pb.setString(tempTrans, forType: .string)
+            break
+        case "COPY_SOURCE_ACTION":
+            let pb = NSPasteboard.general
+            pb.clearContents()
+            pb.setString(temp, forType: .string)
+            break
         case "CLOSE_ACTION":
             print("Nothing to do")
+            break
         default:
             break
         }

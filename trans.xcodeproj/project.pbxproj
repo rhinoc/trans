@@ -3,14 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ECC7B54BCBF88F197A965B7 /* Pods_trans.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66355C472D98083FF84A11F1 /* Pods_trans.framework */; };
+		2C1A8A4723E9385700930E6C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1A8A4623E9385700930E6C /* Utils.swift */; };
 		2C85913723DB176400AA6A47 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85913623DB176400AA6A47 /* EventMonitor.swift */; };
 		2C85913A23DB269800AA6A47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C85913923DB269800AA6A47 /* Main.storyboard */; };
 		2C9928BA23DAB450009B13A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9928B923DAB450009B13A9 /* AppDelegate.swift */; };
-		2C9928BC23DAB450009B13A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9928BB23DAB450009B13A9 /* ViewController.swift */; };
 		2C9928BF23DAB450009B13A9 /* trans.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C9928BD23DAB450009B13A9 /* trans.xcdatamodeld */; };
 		2C9928C123DAB452009B13A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9928C023DAB452009B13A9 /* Assets.xcassets */; };
 		2C9928CD23DABE9B009B13A9 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9928CC23DABE9B009B13A9 /* PopoverViewController.swift */; };
@@ -19,11 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C1A8A4623E9385700930E6C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2C85913623DB176400AA6A47 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		2C85913923DB269800AA6A47 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2C9928B623DAB450009B13A9 /* trans.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trans.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9928B923DAB450009B13A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C9928BB23DAB450009B13A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C9928BE23DAB450009B13A9 /* tranns.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tranns.xcdatamodel; sourceTree = "<group>"; };
 		2C9928C023DAB452009B13A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C9928C523DAB452009B13A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +32,9 @@
 		2C9928CC23DABE9B009B13A9 /* PopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverViewController.swift; sourceTree = "<group>"; };
 		2C9928CF23DAE053009B13A9 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		2C9928D123DAE34F009B13A9 /* PrefsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
+		41B0B4DF020570EDB1BA6285 /* Pods-trans.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trans.release.xcconfig"; path = "Target Support Files/Pods-trans/Pods-trans.release.xcconfig"; sourceTree = "<group>"; };
+		66355C472D98083FF84A11F1 /* Pods_trans.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trans.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A198669C22EC238EC459E8E /* Pods-trans.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trans.debug.xcconfig"; path = "Target Support Files/Pods-trans/Pods-trans.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ECC7B54BCBF88F197A965B7 /* Pods_trans.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +54,7 @@
 			children = (
 				2C9928CF23DAE053009B13A9 /* Preferences.swift */,
 				2C85913623DB176400AA6A47 /* EventMonitor.swift */,
+				2C1A8A4623E9385700930E6C /* Utils.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -58,6 +64,8 @@
 			children = (
 				2C9928B823DAB450009B13A9 /* trans */,
 				2C9928B723DAB450009B13A9 /* Products */,
+				6CDA7CE99C2A2CD8B3FE4206 /* Pods */,
+				375D92E08D676624FFAA426B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,10 +96,26 @@
 			isa = PBXGroup;
 			children = (
 				2C9928CC23DABE9B009B13A9 /* PopoverViewController.swift */,
-				2C9928BB23DAB450009B13A9 /* ViewController.swift */,
 				2C9928D123DAE34F009B13A9 /* PrefsViewController.swift */,
 			);
 			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		375D92E08D676624FFAA426B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66355C472D98083FF84A11F1 /* Pods_trans.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CDA7CE99C2A2CD8B3FE4206 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A198669C22EC238EC459E8E /* Pods-trans.debug.xcconfig */,
+				41B0B4DF020570EDB1BA6285 /* Pods-trans.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C9928C923DAB452009B13A9 /* Build configuration list for PBXNativeTarget "trans" */;
 			buildPhases = (
+				B44FAED4DF3E371E04A195E4 /* [CP] Check Pods Manifest.lock */,
 				2C9928B223DAB450009B13A9 /* Sources */,
 				2C9928B323DAB450009B13A9 /* Frameworks */,
 				2C9928B423DAB450009B13A9 /* Resources */,
+				A9F6469608B4C27AD7CE162B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,6 +185,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A9F6469608B4C27AD7CE162B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-trans/Pods-trans-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-trans/Pods-trans-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-trans/Pods-trans-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B44FAED4DF3E371E04A195E4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-trans-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2C9928B223DAB450009B13A9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -167,9 +235,9 @@
 				2C9928CD23DABE9B009B13A9 /* PopoverViewController.swift in Sources */,
 				2C9928D223DAE34F009B13A9 /* PrefsViewController.swift in Sources */,
 				2C9928BF23DAB450009B13A9 /* trans.xcdatamodeld in Sources */,
+				2C1A8A4723E9385700930E6C /* Utils.swift in Sources */,
 				2C9928D023DAE053009B13A9 /* Preferences.swift in Sources */,
 				2C85913723DB176400AA6A47 /* EventMonitor.swift in Sources */,
-				2C9928BC23DAB450009B13A9 /* ViewController.swift in Sources */,
 				2C9928BA23DAB450009B13A9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +360,7 @@
 		};
 		2C9928CA23DAB452009B13A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A198669C22EC238EC459E8E /* Pods-trans.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trans/trans.entitlements;
@@ -305,7 +374,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = rhinoc.trans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -314,6 +383,7 @@
 		};
 		2C9928CB23DAB452009B13A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 41B0B4DF020570EDB1BA6285 /* Pods-trans.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = trans/trans.entitlements;
@@ -327,7 +397,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = rhinoc.trans;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

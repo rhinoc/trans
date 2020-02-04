@@ -674,26 +674,31 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="tranns" customModuleProvider="target">
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="trans" customModuleProvider="target">
                     <connections>
                         <outlet property="menu" destination="DwD-w9-lcA" id="VTx-Og-gg7"/>
                         <outlet property="pasteTransToggle" destination="ctg-bT-eHK" id="d2d-1P-KZi"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="DwD-w9-lcA">
                     <items>
+                        <menuItem title="截图取词" keyEquivalent="a" allowsKeyEquivalentWhenHidden="YES" id="XPC-bA-qvd">
+                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            <connections>
+                                <action selector="onCapture:" target="Voe-Tx-rLC" id="lXk-FJ-hfC"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="复制取词" state="on" id="ctg-bT-eHK">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="onTogglePasteTrans:" target="Voe-Tx-rLC" id="bSy-6t-RlX"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="设置" id="jB6-FC-wzM">
+                        <menuItem title="首选项" id="jB6-FC-wzM">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <segue destination="U8G-3S-m6q" kind="show" id="yaK-Qr-sBr"/>
+                                <segue destination="U8G-3S-m6q" kind="show" id="2sb-vJ-eWj"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="rxI-Z8-XZi"/>
@@ -705,13 +710,14 @@
                         </menuItem>
                     </items>
                 </menu>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="55" y="272"/>
         </scene>
         <!--Popover View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="PopoverViewController" id="XfG-lQ-9wD" customClass="PopoverViewController" customModule="tranns" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PopoverViewController" id="XfG-lQ-9wD" customClass="PopoverViewController" customModule="trans" customModuleProvider="target" sceneMemberID="viewController">
                     <customView key="view" id="RAR-jd-uWs">
                         <rect key="frame" x="0.0" y="0.0" width="317" height="187"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -721,7 +727,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Copy" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tdu-as-FVy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onCopy:" target="XfG-lQ-9wD" id="If0-LO-MbR"/>
@@ -732,7 +738,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="FIi-e3-4Vd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onClear:" target="XfG-lQ-9wD" id="Qe2-f3-Jxs"/>
@@ -743,7 +749,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="自动" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" continuous="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="fng-5r-qaX" id="iuu-EB-boP">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="JQ2-YA-8WK">
                                         <items>
                                             <menuItem title="自动" state="on" id="fng-5r-qaX"/>
@@ -760,7 +766,7 @@
                                 <rect key="frame" x="98" y="144" width="192" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="wa5-zr-gTh">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
@@ -771,7 +777,7 @@
                             <textField canDrawConcurrently="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-Qv-YOs">
                                 <rect key="frame" x="18" y="53" width="281" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Translation" id="wBj-jO-19E" customClass="VerticallyCenteredTextFieldCell" customModule="tranns" customModuleProvider="target">
+                                <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" placeholderString="Translation" id="wBj-jO-19E" customClass="VerticallyCenteredTextFieldCell" customModule="trans" customModuleProvider="target">
                                     <font key="font" metaFont="system" size="16"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -782,7 +788,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSActionTemplate" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="aag-Ox-t88">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onGear:" target="XfG-lQ-9wD" id="0Jh-Qn-erI"/>
@@ -802,13 +808,13 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-462" y="255"/>
+            <point key="canvasLocation" x="-475" y="175"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="n1n-NP-fxf">
             <objects>
-                <windowController id="U8G-3S-m6q" sceneMemberID="viewController">
-                    <window key="window" title="设置" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Rdg-BS-8I7">
+                <windowController showSeguePresentationStyle="single" id="U8G-3S-m6q" sceneMemberID="viewController">
+                    <window key="window" title="设置" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Rdg-BS-8I7">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <rect key="contentRect" x="245" y="301" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
@@ -827,7 +833,7 @@
         <!--Prefs View Controller-->
         <scene sceneID="dy0-5y-DAD">
             <objects>
-                <viewController id="pt3-sA-czO" customClass="PrefsViewController" customModule="tranns" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pt3-sA-czO" customClass="PrefsViewController" customModule="trans" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="yrP-HV-prS">
                         <rect key="frame" x="0.0" y="0.0" width="344" height="166"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -837,7 +843,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="确认" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DcH-Rr-PER">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onOK:" target="pt3-sA-czO" id="S5w-o4-HCT"/>
@@ -848,7 +854,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="取消" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5io-uL-Vfw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="onCancel:" target="pt3-sA-czO" id="xZg-hV-YKC"/>
@@ -859,7 +865,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="百度翻译" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="j74-V2-ZOn" id="KBl-Ru-jqK">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <menu key="menu" id="OSe-Os-3Y1">
                                         <items>
                                             <menuItem title="百度翻译" state="on" id="j74-V2-ZOn"/>
@@ -877,7 +883,7 @@
                                 <rect key="frame" x="24" y="128" width="58" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="翻译引擎" id="OBN-R0-fJX">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -886,7 +892,7 @@
                                 <rect key="frame" x="24" y="96" width="45" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="APPID" id="Xve-xd-Lwv">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -895,7 +901,7 @@
                                 <rect key="frame" x="100" y="64" width="224" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="Tjz-NZ-6eU">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <allowedInputSourceLocales>
@@ -907,7 +913,7 @@
                                 <rect key="frame" x="100" y="94" width="224" height="20"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="uYO-M8-0pg">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -916,7 +922,7 @@
                                 <rect key="frame" x="24" y="66" width="42" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="密钥" id="ae3-7y-Dca">
-                                    <font key="font" metaFont="titleBar"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -947,7 +953,7 @@
                 </viewController>
                 <customObject id="1xn-v2-Kop" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="33" y="296"/>
+            <point key="canvasLocation" x="61" y="473"/>
         </scene>
     </scenes>
     <resources>
@@ -955,6 +961,6 @@
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kya-ky-7uu"/>
+        <segue reference="2sb-vJ-eWj"/>
     </inferredMetricsTieBreakers>
 </document>

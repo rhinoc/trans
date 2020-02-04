@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (5.0.0-rc.3)
+  - AsyncSwift (2.0.4)
+  - HotKey (0.1.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0-rc.3)
+  - AsyncSwift (~> 2.0.0)
+  - HotKey
+
+SPEC REPOS:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - Alamofire
+    - AsyncSwift
+    - HotKey
+
+SPEC CHECKSUMS:
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  HotKey: ad59450195936c10992438c4210f673de5aee43e
+
+PODFILE CHECKSUM: e04c701e84c37267a37b9562672c01fc60b1b38f
+
+COCOAPODS: 1.8.4
