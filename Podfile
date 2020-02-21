@@ -6,4 +6,5 @@ target 'trans' do
     pod 'Alamofire', '~> 5.0.0-rc.3'
     pod 'AsyncSwift','~> 2.0.0'
     pod 'HotKey'
+    pod 'KeyHolder'
 end

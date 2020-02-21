@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "609C19BB4788E50C0056FC26F22565EE"
-               BuildableName = "Pods-trans.framework"
-               BlueprintName = "Pods-trans"
+               BlueprintIdentifier = "025D025492734E8907CB9AEB4AD0CC9D"
+               BuildableName = "KeyHolder-KeyHolder.bundle"
+               BlueprintName = "KeyHolder-KeyHolder"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

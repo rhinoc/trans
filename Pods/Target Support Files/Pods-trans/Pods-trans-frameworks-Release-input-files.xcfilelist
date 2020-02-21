@@ -2,3 +2,5 @@ ${PODS_ROOT}/Target Support Files/Pods-trans/Pods-trans-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework
 ${BUILT_PRODUCTS_DIR}/HotKey/HotKey.framework
+${BUILT_PRODUCTS_DIR}/KeyHolder/KeyHolder.framework
+${BUILT_PRODUCTS_DIR}/Magnet/Magnet.framework

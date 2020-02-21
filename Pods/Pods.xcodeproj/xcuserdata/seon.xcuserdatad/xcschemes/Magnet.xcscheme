@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "609C19BB4788E50C0056FC26F22565EE"
-               BuildableName = "Pods-trans.framework"
-               BlueprintName = "Pods-trans"
+               BlueprintIdentifier = "3E149398A6E587455F01510D83B29C52"
+               BuildableName = "Magnet.framework"
+               BlueprintName = "Magnet"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
