@@ -29,10 +29,7 @@ a small and fast translator living in macOS menu bar
 
 ## 🤐 碎碎念
 
-前几天在macOS的App Store上看到一个叫「小翻译」的应用：
-<img src="https://pic.rhinoc.top/mweb/15715563982330.jpg" width="50%">
-
-当时觉得挺简单的，监控剪贴板再随便调用一个在线翻译的API就行了。但是蓝色的图标放菜单太违和了。就想着自己能不能也做一个，于是「trans」就出来了。
+前几天在macOS的App Store上看到一个叫[小翻译](https://apps.apple.com/cn/app/%E5%B0%8F%E7%BF%BB%E8%AF%91/id1477462048?l=en&mt=12)的应用，当时觉得挺简单的，监控剪贴板再随便调用一个在线翻译的API就行了。但是蓝色的图标放菜单太违和了。就想着自己能不能也做一个，于是「trans」就出来了。
 
 和小翻译一样，trans也是一个菜单栏应用，目前支持输入搜索和复制搜索，搜索调用的接口是百度翻译的API。
 
